@@ -1,22 +1,57 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
+from pydantic import BaseModel,Field
+from typing import Annotated,Optional,Literal
 from dotenv import load_dotenv
-from typing import TypedDict,Annotated,Optional
-from pydantic import BaseModel
 
 load_dotenv()
 
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+model = ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
-#schema
+# schema
+json_schema = {
+  "title": "Review",
+  "type": "object",
+  "properties": {
+    "key_themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Write down all the key themes discussed in the review in a list"
+    },
+    "summary": {
+      "type": "string",
+      "description": "A brief summary of the review"
+    },
+    "sentiment": {
+      "type": "string",
+      "enum": ["pos", "neg"],
+      "description": "Return sentiment of the review either negative, positive or neutral"
+    },
+    "pros": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Write down all the pros inside a list"
+    },
+    "cons": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Write down all the cons inside a list"
+    },
+    "name": {
+      "type": ["string", "null"],
+      "description": "Write the name of the reviewer"
+    }
+  },
+  "required": ["key_themes", "summary", "sentiment"]
+}
 
-class  Review(BaseModel): #type:ignore
-    key_themes: Annotated[list[str],"Write down all the key themes discussed in the review in a list"]
-    summary: Annotated[str,"A brief summary of the review"]
-    sentiment: Annotated[str,"Return sentiment of the review"]
-    pros: Annotated[Optional[list[str]],"Write down all the pros in a list"]
-    cons: Annotated[Optional[list[str]],"Write down all the cons in a list"]    
     
-structured_model = model.with_structured_output(Review) #type:ignore
+structured_model = model.with_structured_output(json_schema)
 
 result = structured_model.invoke("""I recently upgraded to the Samsung Galaxy S24 Ultra, and I must say, it’s an absolute powerhouse! The Snapdragon 8 Gen 3 processor makes everything lightning fast—whether I’m gaming, multitasking, or editing photos. The 5000mAh battery easily lasts a full day even with heavy use, and the 45W fast charging is a lifesaver.
 
@@ -32,13 +67,9 @@ S-Pen support is unique and useful
                                  
 Review by Abhi pratap Singh""")
 
-# print(result)
-print(result)
-print(result.summary) #type:ignore
-print(result.sentiment) #type:ignore
-print(result.pros) #type:ignore
-print(result.cons) #type:ignore
-print(result.key_themes) #type:ignore
+
+print(result[-1])
+
 
 
 
