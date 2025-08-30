@@ -30,7 +30,7 @@ doc5 = Document(
 
 docs = [doc1, doc2, doc3, doc4, doc5]
 
-vector_store = Chroma(
+vector_store = Chroma( # or Chroma.from_documents 
     embedding_function=GoogleGenerativeAIEmbeddings(model="models/embedding-001"),
     persist_directory='langchain__vector_store\\my_chroma_db',
     collection_name='sample'
