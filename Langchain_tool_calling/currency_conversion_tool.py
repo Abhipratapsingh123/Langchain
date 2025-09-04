@@ -15,7 +15,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 @tool
 def get_conversion_factor(base_currency: str, target_currency: str) -> float:
     """This function fetches the currency conversion factor between a given base currency and a target currency"""
-    url = f"https://v6.exchangerate-api.com/v6/bc048cde424b4dbb5ac707/pair/{base_currency}/{target_currency}"
+    url = f"https://v6.exchangerate-api.com/v6/bc048cde424b4dbc6b5ac707/pair/{base_currency}/{target_currency}"
     response = requests.get(url)
     data = response.json()
     return data.get("conversion_rate")
