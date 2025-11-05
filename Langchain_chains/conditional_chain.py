@@ -43,7 +43,7 @@ classifier_chain = prompt1 | model | parser2
 prompt2 = PromptTemplate(
     template='Write an appropriate response to this positive feedback, Donot give options just write the short response\n {feedback}',
     input_variables=['feedback']
-)
+)  
 
 prompt3 = PromptTemplate(
     template='Write an appropriate response to this negative feedback, Donot give options just write the short response\n {feedback}',

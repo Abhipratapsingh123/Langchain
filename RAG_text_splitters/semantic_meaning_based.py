@@ -1,12 +1,17 @@
 from langchain_experimental.text_splitter import SemanticChunker
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from dotenv import load_dotenv
 
 load_dotenv()
 
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embedding2 = GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
+
 text_splitter = SemanticChunker(
-    GoogleGenerativeAIEmbeddings(model="models/embedding-001"),breakpoint_threshold_type="standard_deviation",
-    breakpoint_threshold_amount=3
+    embeddings=embedding2,
+    breakpoint_threshold_type="standard_deviation",
+    breakpoint_threshold_amount=2
 )
 
 sample = """

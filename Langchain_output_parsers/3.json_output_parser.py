@@ -12,7 +12,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 template = PromptTemplate(
     template="Give me the name,age and city of a fictional person \n {format_instruction}",
     input_variableे = [],
-    partial_variables={'format_instruction':parser.get_format_instructions()}
+    partial_variables={'format_instruction':parser.get_format_instruction()}
 )
 
 # prompt = template.format()

@@ -1,6 +1,7 @@
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
-from langchain.schema import Document
+from langchain_core.documents import Document
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,26 +29,26 @@ doc5 = Document(
         metadata={"team": "Chennai Super Kings"}
     )
 
-docs = [doc1, doc2, doc3, doc4, doc5]
+docs = [doc1, doc2, doc3, doc4, doc5] 
 
 vector_store = Chroma( # or Chroma.from_documents 
-    embedding_function=GoogleGenerativeAIEmbeddings(model="models/embedding-001"),
+    embedding_function=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2"),
     persist_directory='langchain__vector_store\\my_chroma_db',
     collection_name='sample'
 )
 
 # add documents
-vector_store.add_documents(docs)
+vector_store.add_documents(docs)    
 
 # view documents
 vector_store.get(include=['embeddings','documents', 'metadatas'])
 
 # search documents
-vector_store.similarity_search(
+print(vector_store.similarity_search(
     query='Who among these are a bowler?',
     k=2
 )
-
+)
 # search with similarity score
 vector_store.similarity_search_with_score(
     query='Who among these are a bowler?',

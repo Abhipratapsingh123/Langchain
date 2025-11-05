@@ -18,6 +18,7 @@ for i, doc in enumerate(docs):
     print(f"\n--- Result {i+1} ---")
     print(f"Content:\n{doc.page_content}...")  # truncate for display
 
+
 # """Vector Store Retriever"""
 
 from langchain_chroma import Chroma
@@ -69,12 +70,12 @@ docs = [
     Document(page_content="Chroma is used to store and search document embeddings."),
     Document(page_content="Embeddings are vector representations of text."),
     Document(page_content="MMR helps you get diverse results when doing similarity search."),
-    Document(page_content="LangChain supports Chroma, FAISS, Pinecone, and more."),
+    Document(page_content="LangChain supports Chroma, FAISS, Pinecone, and more.")
 ]
 
 from langchain_community.vectorstores import FAISS
 
-# Initialize OpenAI embeddings
+# Initialize googleAI embeddings
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 # Step 2: Create the FAISS vector store from documents
@@ -115,7 +116,7 @@ all_docs = [
     Document(page_content="Python balances readability with power, making it a popular system design language.", metadata={"source": "I2"}),
     Document(page_content="Photosynthesis enables plants to produce energy by converting sunlight.", metadata={"source": "I3"}),
     Document(page_content="The 2022 FIFA World Cup was held in Qatar and drew global energy and excitement.", metadata={"source": "I4"}),
-    Document(page_content="Black holes bend spacetime and store immense gravitational energy.", metadata={"source": "I5"}),
+    Document(page_content="Black holes bend spacetime and store immense gravitational energy.", metadata={"source": "I5"})
 ]
 
 # Initialize OpenAI embeddings

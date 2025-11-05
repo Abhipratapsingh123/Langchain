@@ -11,6 +11,8 @@ class Student(BaseModel):
 
 new_student = {'age':'32', 'email':'abc@gmail.com'}
 
+
+#this is a pydantic object we have to convert it to dictionary
 student = Student(**new_student) # type:ignore
 
 student_dict = dict(student)

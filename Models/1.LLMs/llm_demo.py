@@ -5,7 +5,7 @@ import os
 # Load environment variables
 load_dotenv(dotenv_path='C:\\Users\\abhip\\Desktop\\langchain_models\\.env')
 
-llm = GoogleGenerativeAI(model="gemini-1.5-flash")
+llm = GoogleGenerativeAI(model="gemini-2.5-flash")
 
 response = llm.invoke("Write a short poem about the moon")
 print(response)

@@ -144,7 +144,7 @@ while True:
     ai_response = result.get("output", str(result))
     chat_history.append(AIMessage(content=ai_response))  # store AI reply
     
-    print("AI:", ai_response)
+    print("AI:", ai_response)   
 
 print("\nChat history:")
 for msg in chat_history:

@@ -18,12 +18,13 @@ prompt = PromptTemplate(
 parser = StrOutputParser()
 
 url = r"https://en.wikipedia.org/wiki/LangChain"
-
-loader = WebBaseLoader(url)
+url2 = r"https://www.makemytrip.com/routeplanner/gurgaon-agra.html"
+url3 = r"https://www.rome2rio.com/map/Gurgaon/Agra"
+loader = WebBaseLoader( url3)
 
 docs = loader.load()
 
 chain = prompt|model|parser
-
-result = chain.invoke({'question':'What is Langchain?','text':docs[0].page_content})
+print(docs)
+result = chain.invoke({'question':'What is this information about?','text':docs[0].page_content})
 print(result)

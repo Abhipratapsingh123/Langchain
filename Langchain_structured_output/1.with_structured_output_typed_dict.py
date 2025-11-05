@@ -7,14 +7,20 @@ load_dotenv()
 
 model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-#schema
-
+#schema for typed dict
+class Review1(TypedDict):
+    summary:str
+    sentiment:str
+    
+#schema for pydantic
 class  Review(BaseModel): #type:ignore
     key_themes: Annotated[list[str],"Write down all the key themes discussed in the review in a list"]
     summary: Annotated[str,"A brief summary of the review"]
     sentiment: Annotated[str,"Return sentiment of the review"]
     pros: Annotated[Optional[list[str]],"Write down all the pros in a list"]
-    cons: Annotated[Optional[list[str]],"Write down all the cons in a list"]    
+    cons: Annotated[Optional[list[str]],"Write down all the cons in a list"]   
+    name: Annotated[Optional[str],"Write the name of the reviewer"] 
+    
     
 structured_model = model.with_structured_output(Review) #type:ignore
 
@@ -32,8 +38,7 @@ S-Pen support is unique and useful
                                  
 Review by Abhi pratap Singh""")
 
-# print(result)
-print(result)
+# print(result) #type:ignore
 print(result.summary) #type:ignore
 print(result.sentiment) #type:ignore
 print(result.pros) #type:ignore

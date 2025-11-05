@@ -9,7 +9,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash",temperature=0.1)
 
 p1 = "You are a professional doctor, Now tell me Which medicine I have to take if I have a headache, tell me in less words"
 
-p2 = "Write a 5 line poem on cricket"
+p2 = "Write a code in python to prinfibonscci number in recursive function"
 
 
 response = model.invoke(p2)

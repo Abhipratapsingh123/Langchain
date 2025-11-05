@@ -3,8 +3,7 @@ from langchain_community.document_loaders import PyPDFLoader,DirectoryLoader
 loader= DirectoryLoader(
     path="Langhcain_document_loaders\\directory_reader",
     glob="*.pdf" ,# to define which files to load, all pdf file in this case
-    loader_cls=PyPDFLoader
-    
+    loader_cls=PyPDFLoader   
 )
 docs = loader.load()
 
